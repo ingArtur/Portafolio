@@ -1,9 +1,5 @@
-var typed = new Typed(".typing", {
-    strings:["", "Web Developer", "Backend Developer"],
-    typeSpeed: 100,
-    Backspeed:60,
-    loop:true
-})
+// Typed.js se inicializa desde language-switcher.js
+let typed;
 
 /*Aside */
 
@@ -83,52 +79,37 @@ const nav = document.querySelector(".nav"),
     const closeModal = document.querySelector('.close-modal');
     const modalOverlay = document.querySelector('.modal-overlay');
 
+    // Datos estáticos para las certificaciones (iconos y rutas de certificados)
     const techInfo = {
         java: {
-            title: 'Java',
-            description: 'Java es un lenguaje de programación orientado a objetos y una plataforma informática. Es robusto, seguro y portable. He desarrollado aplicaciones backend usando Spring Boot, implementando arquitecturas MVC y APIs REST.',
             cert: 'image/cert-java.jpg',
             icon: 'fab fa-java'
         },
         javascript: {
-            title: 'JavaScript',
-            description: 'JavaScript es un lenguaje de programación dinámico que permite crear contenido web interactivo. Lo uso para desarrollo frontend y backend (Node.js), manipulación del DOM y desarrollo de aplicaciones web modernas.',
             cert: 'image/cert-js.jpg',
             icon: 'fab fa-js-square'
         },
         spring: {
-            title: 'Spring Boot',
-            description: 'Spring Boot es un framework de Java que facilita la creación de aplicaciones web y microservicios. Lo utilizo para desarrollar APIs REST robustas, gestionar dependencias y implementar patrones de diseño.',
             cert: 'image/cert-spring.jpg',
             icon: 'fas fa-leaf'
         },
         aws: {
-            title: 'Amazon Web Services',
-            description: 'AWS es una plataforma de servicios de nube que ofrece computación, almacenamiento y bases de datos. Tengo experiencia en EC2, S3, RDS y Lambda para desplegar aplicaciones escalables en la nube.',
             cert: 'image/cert-aws.jpg',
             icon: 'fab fa-aws'
         },
         docker: {
-            title: 'Docker',
-            description: 'Docker es una plataforma de containerización que permite empaquetar aplicaciones y sus dependencias. Lo uso para crear entornos consistentes, facilitar deployments y mejorar la escalabilidad de aplicaciones.',
             cert: 'image/cert-docker.jpg',
             icon: 'fab fa-docker'
         },
         mysql: {
-            title: 'MySQL',
-            description: 'MySQL es un sistema de gestión de bases de datos relacionales. Tengo experiencia diseñando esquemas, optimizando consultas, implementando relaciones y asegurando la integridad de los datos.',
             cert: 'image/cert-mysql.jpg',
             icon: 'fas fa-database'
         },
         git: {
-            title: 'Git',
-            description: 'Git es un sistema de control de versiones distribuido. Lo uso diariamente para gestionar código, colaborar en equipo, manejar branches, realizar merges y mantener historiales de cambios.',
             cert: 'image/cert-git.jpg',
             icon: 'fab fa-git-alt'
         },
         kubernetes: {
-            title: 'Kubernetes',
-            description: 'Kubernetes es una plataforma de orquestación de contenedores que automatiza el despliegue, escalado y gestión de aplicaciones containerizadas. Lo uso para gestionar microservicios en producción.',
             cert: 'image/cert-k8s.jpg',
             icon: 'fas fa-cubes'
         }
@@ -139,9 +120,13 @@ const nav = document.querySelector(".nav"),
             const tech = this.getAttribute('data-tech');
             const info = techInfo[tech];
             
+            // Obtener traducciones actuales
+            const currentLang = window.languageSwitcher?.currentLanguage || 'es';
+            const techTranslations = translations[currentLang]?.portfolio?.technologies?.[tech];
+            
             document.getElementById('modalIcon').className = info.icon;
-            document.getElementById('modalTitle').textContent = info.title;
-            document.getElementById('modalDescription').textContent = info.description;
+            document.getElementById('modalTitle').textContent = techTranslations?.name || tech.toUpperCase();
+            document.getElementById('modalDescription').textContent = techTranslations?.longDescription || 'Descripción no disponible';
             document.getElementById('modalCert').src = info.cert;
             
             modal.style.display = 'block';
@@ -206,23 +191,24 @@ const nav = document.querySelector(".nav"),
     // Función para validar formulario
     function validateForm(formData) {
         const errors = {};
+        const messages = getFormValidationMessages();
 
         if (!formData.name || formData.name.length < 2) {
-            errors.name = 'El nombre debe tener al menos 2 caracteres';
+            errors.name = messages.nameMin;
         }
 
         if (!formData.email) {
-            errors.email = 'El email es requerido';
+            errors.email = messages.emailRequired;
         } else if (!isValidEmail(formData.email)) {
-            errors.email = 'Por favor ingresa un email válido';
+            errors.email = messages.emailInvalid;
         }
 
         if (!formData.subject || formData.subject.length < 5) {
-            errors.subject = 'El asunto debe tener al menos 5 caracteres';
+            errors.subject = messages.subjectMin;
         }
 
         if (!formData.message || formData.message.length < 10) {
-            errors.message = 'El mensaje debe tener al menos 10 caracteres';
+            errors.message = messages.messageMin;
         }
 
         return errors;
@@ -267,7 +253,7 @@ const nav = document.querySelector(".nav"),
             Object.keys(errors).forEach(field => {
                 showFieldError(field, errors[field]);
             });
-            showFormStatus('Por favor corrige los errores en el formulario');
+            showFormStatus(getFormValidationMessages().formError);
             return;
         }
 
@@ -286,15 +272,15 @@ const nav = document.querySelector(".nav"),
             const result = await response.json();
 
             if (response.ok && result.success) {
-                showFormStatus(result.message || '¡Mensaje enviado correctamente! Te responderé pronto.', true);
+                showFormStatus(result.message || getFormMessages().success, true);
                 contactForm.reset();
             } else {
-                showFormStatus(result.error || 'Error al enviar el mensaje. Intenta de nuevo.');
+                showFormStatus(result.error || getFormMessages().error);
             }
 
         } catch (error) {
             console.error('Error:', error);
-            showFormStatus('Error de conexión. Verifica que el servidor esté funcionando o intenta más tarde.');
+            showFormStatus(getFormMessages().connectionError);
         } finally {
             setSubmitButtonState(false);
         }
@@ -303,7 +289,7 @@ const nav = document.querySelector(".nav"),
     // Validación en tiempo real
     document.getElementById('name').addEventListener('blur', function() {
         if (this.value.trim().length > 0 && this.value.trim().length < 2) {
-            showFieldError('name', 'El nombre debe tener al menos 2 caracteres');
+            showFieldError('name', getFormValidationMessages().nameMin);
         } else {
             document.getElementById('nameError').textContent = '';
             this.classList.remove('error');
@@ -313,7 +299,7 @@ const nav = document.querySelector(".nav"),
     document.getElementById('email').addEventListener('blur', function() {
         const email = this.value.trim();
         if (email.length > 0 && !isValidEmail(email)) {
-            showFieldError('email', 'Por favor ingresa un email válido');
+            showFieldError('email', getFormValidationMessages().emailInvalid);
         } else {
             document.getElementById('emailError').textContent = '';
             this.classList.remove('error');
@@ -322,7 +308,7 @@ const nav = document.querySelector(".nav"),
 
     document.getElementById('subject').addEventListener('blur', function() {
         if (this.value.trim().length > 0 && this.value.trim().length < 5) {
-            showFieldError('subject', 'El asunto debe tener al menos 5 caracteres');
+            showFieldError('subject', getFormValidationMessages().subjectMin);
         } else {
             document.getElementById('subjectError').textContent = '';
             this.classList.remove('error');
@@ -331,7 +317,7 @@ const nav = document.querySelector(".nav"),
 
     document.getElementById('message').addEventListener('blur', function() {
         if (this.value.trim().length > 0 && this.value.trim().length < 10) {
-            showFieldError('message', 'El mensaje debe tener al menos 10 caracteres');
+            showFieldError('message', getFormValidationMessages().messageMin);
         } else {
             document.getElementById('messageError').textContent = '';
             this.classList.remove('error');

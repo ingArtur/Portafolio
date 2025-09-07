@@ -77,3 +77,84 @@
 .style-switcher .color-5 {
     background: #f021b2;
 }
+
+/* Language Switcher */
+.style-switcher .language-switcher {
+    top: 110px;
+}
+
+.style-switcher .language-switcher i {
+    font-size: 18px;
+}
+
+/* Language Modal */
+.language-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.language-modal.show {
+    display: flex;
+}
+
+.language-modal-content {
+    background: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    min-width: 280px;
+}
+
+.language-modal-content h4 {
+    color: var(--text-black-900);
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.language-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lang-btn {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--bg-black-50);
+    background: var(--bg-black-100);
+    color: var(--text-black-900);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.lang-btn:hover {
+    border-color: var(--skin-color);
+    background: var(--bg-black-50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lang-btn.active {
+    background: var(--skin-color);
+    color: #ffffff;
+    border-color: var(--skin-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
