@@ -183,23 +183,21 @@ class LanguageSwitcher {
 
         const infoItems = document.querySelectorAll('.info-item p');
         
-        // Mapear elementos con las traducciones
+        // Mapear elementos con las traducciones (sin cumpleaños, edad, email, teléfono)
         const infoMapping = [
-            personalInfo.birthday,
-            personalInfo.age, 
-            personalInfo.email,
-            personalInfo.degree,
-            personalInfo.phone,
-            personalInfo.city,
-            personalInfo.freelance
+            personalInfo.github,      // GitHub
+            personalInfo.linkedin,    // LinkedIn  
+            personalInfo.degree,      // Degree
+            personalInfo.city,        // City
+            personalInfo.freelance    // Freelance
         ];
 
         infoItems.forEach((item, index) => {
             if (infoMapping[index] && item.innerHTML.includes(':')) {
                 const value = item.innerHTML.split('</span>')[1] || '';
-                if (index === 3) { // Degree
+                if (index === 2) { // Degree
                     item.innerHTML = `${infoMapping[index]} : <span>${personalInfo.degreeValue}</span>`;
-                } else if (index === 6) { // Freelance
+                } else if (index === 4) { // Freelance
                     item.innerHTML = `${infoMapping[index]} : <span>${personalInfo.freelanceValue}</span>`;
                 } else {
                     item.innerHTML = `${infoMapping[index]} : ${value}`;

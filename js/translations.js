@@ -25,12 +25,10 @@ const translations = {
             profession: 'Desarrollador Backend',
             description: 'Tecnólogo en desarrollo de software apasionado por el backend, la nube y la automatización. Trabajo con Java, JavaScript, bases de datos relacionales y no relacionales. Me he formado en herramientas modernas como AWS, Terraform, Docker y Kubernetes. Soy una persona autodidacta, curiosa y comprometida con mi crecimiento continuo.',
             personalInfo: {
-                birthday: 'Cumpleaños',
-                age: 'Edad',
-                email: 'Email',
+                github: 'GitHub',
+                linkedin: 'LinkedIn',
                 degree: 'Título',
                 degreeValue: 'Tecnólogo en Análisis y Desarrollo de Software',
-                phone: 'Teléfono',
                 city: 'Ciudad',
                 freelance: 'Freelance',
                 freelanceValue: 'Disponible'
@@ -195,12 +193,10 @@ const translations = {
             profession: 'Backend Developer',
             description: 'Software development technologist passionate about backend, cloud and automation. I work with Java, JavaScript, relational and non-relational databases. I have trained in modern tools like AWS, Terraform, Docker and Kubernetes. I am a self-taught, curious person committed to my continuous growth.',
             personalInfo: {
-                birthday: 'Birthday',
-                age: 'Age',
-                email: 'Email',
+                github: 'GitHub',
+                linkedin: 'LinkedIn',
                 degree: 'Degree',
                 degreeValue: 'Software Analysis and Development Technologist',
-                phone: 'Phone',
                 city: 'City',
                 freelance: 'Freelance',
                 freelanceValue: 'Available'

@@ -54,17 +54,21 @@ Este es un sitio web de portafolio personal para Andres Aroca, construido como u
 - Todos los temas usan propiedades personalizadas CSS definidas en `:root` y `body.dark`
 
 ### Sistema Multiidioma
+- **Modal de selección independiente** - Botón de idioma (🌐) que abre modal dedicado
 - **Cambio dinámico** entre español e inglés sin recargar página
 - **Persistencia** del idioma seleccionado en localStorage
 - **Traducción completa** de toda la interfaz y contenido
 - **Validaciones del formulario** traducidas en tiempo real
-- **Botones con banderas** (🇪🇸/🇺🇸) en panel de configuración
+- **Modales de certificaciones** con traducciones dinámicas en tiempo real
+- **Botones con banderas** (🇪🇸 Español / 🇺🇸 English) en modal dedicado
 
 ### Sección de Certificaciones Interactiva
 - **Cards clicables** con iconos de tecnologías (Java, JavaScript, Spring Boot, AWS, Docker, etc.)
-- **Modales informativos** con descripciones detalladas de cada tecnología
+- **Modales informativos** con descripciones detalladas completamente traducidas
+- **Traducciones dinámicas** - Los modales muestran textos en el idioma actual automáticamente
 - **Preparado para mostrar certificados** - estructura lista para imágenes
 - **Efectos hover** y transiciones suaves
+- **Sistema de datos separado** - Iconos/imágenes estáticos + textos desde translations.js
 
 ### Formulario de Contacto Funcional
 - **Backend completo** con Node.js/Express y Nodemailer
@@ -184,7 +188,34 @@ POST /api/contact
 ```
 
 ### Estructura de Componentes Interactivos
-- **Certificaciones**: Cards con `data-tech` para identificar tecnología
-- **Modal**: Sistema reutilizable para mostrar detalles
+- **Certificaciones**: Cards con `data-tech` y `data-translate` para contenido dinámico
+- **Modal de Certificaciones**: Sistema que obtiene traducciones en tiempo real del idioma actual
+- **Modal de Idiomas**: Sistema independiente del panel de configuración con botones de selección
 - **Formulario**: Validación client/server con mensajes traducidos
-- **Style Switcher**: Panel lateral con controles de tema e idioma
+- **Style Switcher**: Panel lateral con controles de tema
+- **Language Switcher**: Botón independiente que abre modal de selección de idiomas
+
+## Funcionamiento del Sistema de Traducciones
+
+### Arquitectura de Traducciones
+```javascript
+// Patrón de implementación:
+1. HTML con data-translate -> Traducciones automáticas vía loadLanguage()
+2. Modales dinámicos -> Traducciones en tiempo real al abrir
+3. Formularios -> Funciones helper que obtienen mensajes del idioma actual
+```
+
+### Flujo de Cambio de Idioma
+1. **Click en botón idioma (🌐)** → Abre modal de selección
+2. **Selección de idioma** → Ejecuta changeLanguage()
+3. **Actualización automática**:
+   - Elementos con `data-translate` se actualizan automáticamente
+   - Typed.js se reinicia con nuevo texto
+   - localStorage guarda preferencia
+   - Próximos modales usan nuevo idioma
+4. **Modal se cierra** automáticamente
+
+### Tecnologías con Modal Dinámico
+- Java, JavaScript, Spring Boot, AWS, Docker, MySQL, Git, Kubernetes
+- Cada tecnología tiene: `name`, `description`, `longDescription` en ambos idiomas
+- Los modales obtienen textos de `translations[currentLang].portfolio.technologies[tech]`
