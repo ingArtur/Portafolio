@@ -33,7 +33,6 @@
             <ul class="nav">
                 <li><a href="#home" class="active"><i class="fa fa-home"></i>Home</a></li>
                 <li><a href="#about"><i class="fa fa-user"></i>About</a></li>
-                <li><a href="#service"><i class="fa fa-list"></i>Services</a></li>
                 <li><a href="#portafolio"><i class="fa fa-briefcase"></i>Portafolio</a></li>
                 <li><a href="#contact"><i class="fa fa-comments"></i>Contacto</a></li>
             </ul>
@@ -227,101 +226,100 @@
                 </div>
         </section>
         <!--about end-->
-        <!--Services start-->
-        <section class="service section" id="service">
-            <div class="container">
-                <div class="row">
-                    <div class="section-tittle padd-15">
-                        <h2>services</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!--Service item start-->
-                <div class="service-item padd-15">
-                    <div class="service-item-inner">
-                        <div class="icon">
-                            <i class="fa fa-laptop-code"></i>
-                        </div>
-                        <h4>Web desing</h4>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="service-item padd-15">
-                    <div class="service-item-inner">
-                        <div class="icon">
-                            <i class="fa fa-mobile-alt"></i>
-                        </div>
-                        <h4>Web desing</h4>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="service-item padd-15">
-                    <div class="service-item-inner">
-                        <div class="icon">
-                            <i class="fa fa-palette"></i>
-                        </div>
-                        <h4>Web desing</h4>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="service-item padd-15">
-                    <div class="service-item-inner">
-                        <div class="icon">
-                            <i class="fa fa-code"></i>
-                        </div>
-                        <h4>Web desing</h4>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="service-item padd-15">
-                    <div class="service-item-inner">
-                        <div class="icon">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <h4>Web desing</h4>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="service-item padd-15">
-                    <div class="service-item-inner">
-                        <div class="icon">
-                            <i class="fa fa-bullhorn"></i>
-                        </div>
-                        <h4>Web desing</h4>
-                        <p></p>
-                    </div>
-                    <!--Service item end-->
-                </div>
-        </section>
-        <!--Services end-->
         <!--Portafolio start-->
         <section class="portafolio section" id="portafolio">
             <div class="container">
                 <div class="row">
                     <div class="section-tittle padd-15">
-                        <h2>Portafolio</h2>
+                        <h2>Certificaciones</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="portafolio-heading padd-15 ">
-                        <h2>My last projects :</h2>
+                    <div class="portafolio-heading padd-15">
+                        <h2>Mis certificaciones y tecnologías:</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <!--Portafolio items start-->
-                    <div class="portafolio-item padd-15">
-                        <div class="portafolio-item-inner shadow-dark">
-                            <div class="portafolio-img">
-                                <img src="" alt="">
-                            </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="java">
+                            <i class="fab fa-java"></i>
+                            <h5>Java</h5>
+                            <p>Programación orientada a objetos</p>
                         </div>
                     </div>
-                    <!--Portafolio items end-->
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="javascript">
+                            <i class="fab fa-js-square"></i>
+                            <h5>JavaScript</h5>
+                            <p>Desarrollo web dinámico</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="spring">
+                            <i class="fas fa-leaf"></i>
+                            <h5>Spring Boot</h5>
+                            <p>Framework para APIs REST</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="aws">
+                            <i class="fab fa-aws"></i>
+                            <h5>AWS</h5>
+                            <p>Cloud Computing y servicios</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="docker">
+                            <i class="fab fa-docker"></i>
+                            <h5>Docker</h5>
+                            <p>Containerización de aplicaciones</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="mysql">
+                            <i class="fas fa-database"></i>
+                            <h5>MySQL</h5>
+                            <p>Gestión de bases de datos</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="git">
+                            <i class="fab fa-git-alt"></i>
+                            <h5>Git</h5>
+                            <p>Control de versiones</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="kubernetes">
+                            <i class="fas fa-cubes"></i>
+                            <h5>Kubernetes</h5>
+                            <p>Orquestación de contenedores</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         <!--Portafolio End-->
+        
+        <!-- Modal para certificados -->
+        <div class="cert-modal" id="certModal">
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <div class="modal-header">
+                        <i id="modalIcon"></i>
+                        <h3 id="modalTitle"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalDescription"></p>
+                        <div class="cert-image">
+                            <img id="modalCert" src="" alt="Certificado">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!--contacto start-->
         <section class="contact section" id="contact">
             <div class="container">
