@@ -365,37 +365,76 @@
                 <!--Contact form start-->
                 <div class="row">
                     <div class="contact-form padd-15">
-                        <div class="row">
-                            <div class="form-item col-6 padd-15">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name">
+                        <form id="contactForm" novalidate>
+                            <div class="form-status" id="formStatus"></div>
+                            <div class="row">
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="name"
+                                               name="name"
+                                               placeholder="Nombre *"
+                                               required
+                                               minlength="2"
+                                               maxlength="100">
+                                        <div class="error-message" id="nameError"></div>
+                                    </div>
+                                </div>
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <input type="email" 
+                                               class="form-control" 
+                                               id="email"
+                                               name="email"
+                                               placeholder="Email *"
+                                               required
+                                               maxlength="100">
+                                        <div class="error-message" id="emailError"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-item col-6 padd-15">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email">
+                            <div class="row">
+                                <div class="form-item col-12 padd-15">
+                                    <div class="form-group">
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="subject"
+                                               name="subject"
+                                               placeholder="Asunto *"
+                                               required
+                                               minlength="5"
+                                               maxlength="200">
+                                        <div class="error-message" id="subjectError"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-item col-12 padd-15">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="subject">
+                            <div class="row">
+                                <div class="form-item col-12 padd-15">
+                                    <div class="form-group">
+                                        <textarea name="message" 
+                                                  class="form-control" 
+                                                  id="message"
+                                                  placeholder="Mensaje *"
+                                                  rows="6"
+                                                  required
+                                                  minlength="10"
+                                                  maxlength="1000"></textarea>
+                                        <div class="error-message" id="messageError"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-item col-12 padd-15">
-                                <div class="form-group">
-                                    <textarea name="" class="form-control" id="" placeholder="mesagge"></textarea>
+                            <div class="row">
+                                <div class="form-item col-12 padd-15">
+                                    <button type="submit" class="btn" id="submitBtn">
+                                        <span class="btn-text">Enviar Mensaje</span>
+                                        <span class="btn-loader" style="display: none;">
+                                            <i class="fas fa-spinner fa-spin"></i> Enviando...
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-item col-12 padd-15">
-                                <button type="submit" class="btn">Send Mesagge</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

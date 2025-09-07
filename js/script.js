@@ -157,3 +157,183 @@ const nav = document.querySelector(".nav"),
             modal.style.display = 'none';
         }
     });
+
+    // Funcionalidad del formulario de contacto
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+
+    // Configuración del backend
+    const API_BASE_URL = 'http://localhost:3000/api';
+
+    // Función para mostrar mensajes de estado
+    function showFormStatus(message, isSuccess = false) {
+        formStatus.innerHTML = `
+            <div class="alert ${isSuccess ? 'alert-success' : 'alert-error'}">
+                <i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i>
+                ${message}
+            </div>
+        `;
+        formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Función para limpiar errores
+    function clearErrors() {
+        const errorElements = document.querySelectorAll('.error-message');
+        errorElements.forEach(el => el.textContent = '');
+        
+        const inputElements = document.querySelectorAll('.form-control');
+        inputElements.forEach(el => el.classList.remove('error'));
+    }
+
+    // Función para mostrar errores específicos
+    function showFieldError(fieldName, message) {
+        const errorElement = document.getElementById(`${fieldName}Error`);
+        const inputElement = document.getElementById(fieldName);
+        
+        if (errorElement && inputElement) {
+            errorElement.textContent = message;
+            inputElement.classList.add('error');
+        }
+    }
+
+    // Función para validar email
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Función para validar formulario
+    function validateForm(formData) {
+        const errors = {};
+
+        if (!formData.name || formData.name.length < 2) {
+            errors.name = 'El nombre debe tener al menos 2 caracteres';
+        }
+
+        if (!formData.email) {
+            errors.email = 'El email es requerido';
+        } else if (!isValidEmail(formData.email)) {
+            errors.email = 'Por favor ingresa un email válido';
+        }
+
+        if (!formData.subject || formData.subject.length < 5) {
+            errors.subject = 'El asunto debe tener al menos 5 caracteres';
+        }
+
+        if (!formData.message || formData.message.length < 10) {
+            errors.message = 'El mensaje debe tener al menos 10 caracteres';
+        }
+
+        return errors;
+    }
+
+    // Función para cambiar estado del botón
+    function setSubmitButtonState(isLoading) {
+        const btnText = document.querySelector('.btn-text');
+        const btnLoader = document.querySelector('.btn-loader');
+        
+        if (isLoading) {
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline';
+            submitBtn.disabled = true;
+        } else {
+            btnText.style.display = 'inline';
+            btnLoader.style.display = 'none';
+            submitBtn.disabled = false;
+        }
+    }
+
+    // Manejador del formulario
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Limpiar errores previos
+        clearErrors();
+        formStatus.innerHTML = '';
+
+        // Obtener datos del formulario
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            subject: document.getElementById('subject').value.trim(),
+            message: document.getElementById('message').value.trim()
+        };
+
+        // Validar formulario
+        const errors = validateForm(formData);
+        
+        if (Object.keys(errors).length > 0) {
+            Object.keys(errors).forEach(field => {
+                showFieldError(field, errors[field]);
+            });
+            showFormStatus('Por favor corrige los errores en el formulario');
+            return;
+        }
+
+        // Enviar formulario
+        setSubmitButtonState(true);
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/contact`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                showFormStatus(result.message || '¡Mensaje enviado correctamente! Te responderé pronto.', true);
+                contactForm.reset();
+            } else {
+                showFormStatus(result.error || 'Error al enviar el mensaje. Intenta de nuevo.');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            showFormStatus('Error de conexión. Verifica que el servidor esté funcionando o intenta más tarde.');
+        } finally {
+            setSubmitButtonState(false);
+        }
+    });
+
+    // Validación en tiempo real
+    document.getElementById('name').addEventListener('blur', function() {
+        if (this.value.trim().length > 0 && this.value.trim().length < 2) {
+            showFieldError('name', 'El nombre debe tener al menos 2 caracteres');
+        } else {
+            document.getElementById('nameError').textContent = '';
+            this.classList.remove('error');
+        }
+    });
+
+    document.getElementById('email').addEventListener('blur', function() {
+        const email = this.value.trim();
+        if (email.length > 0 && !isValidEmail(email)) {
+            showFieldError('email', 'Por favor ingresa un email válido');
+        } else {
+            document.getElementById('emailError').textContent = '';
+            this.classList.remove('error');
+        }
+    });
+
+    document.getElementById('subject').addEventListener('blur', function() {
+        if (this.value.trim().length > 0 && this.value.trim().length < 5) {
+            showFieldError('subject', 'El asunto debe tener al menos 5 caracteres');
+        } else {
+            document.getElementById('subjectError').textContent = '';
+            this.classList.remove('error');
+        }
+    });
+
+    document.getElementById('message').addEventListener('blur', function() {
+        if (this.value.trim().length > 0 && this.value.trim().length < 10) {
+            showFieldError('message', 'El mensaje debe tener al menos 10 caracteres');
+        } else {
+            document.getElementById('messageError').textContent = '';
+            this.classList.remove('error');
+        }
+    });
