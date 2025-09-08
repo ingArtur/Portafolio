@@ -183,7 +183,7 @@ class LanguageSwitcher {
 
         const infoItems = document.querySelectorAll('.info-item p');
         
-        // Mapear elementos con las traducciones (sin cumpleaños, edad, email, teléfono)
+        // Mapear elementos con las traducciones completas (incluyendo HTML)
         const infoMapping = [
             personalInfo.github,      // GitHub
             personalInfo.linkedin,    // LinkedIn  
@@ -193,15 +193,8 @@ class LanguageSwitcher {
         ];
 
         infoItems.forEach((item, index) => {
-            if (infoMapping[index] && item.innerHTML.includes(':')) {
-                const value = item.innerHTML.split('</span>')[1] || '';
-                if (index === 2) { // Degree
-                    item.innerHTML = `${infoMapping[index]} : <span>${personalInfo.degreeValue}</span>`;
-                } else if (index === 4) { // Freelance
-                    item.innerHTML = `${infoMapping[index]} : <span>${personalInfo.freelanceValue}</span>`;
-                } else {
-                    item.innerHTML = `${infoMapping[index]} : ${value}`;
-                }
+            if (infoMapping[index]) {
+                item.innerHTML = infoMapping[index];
             }
         });
 

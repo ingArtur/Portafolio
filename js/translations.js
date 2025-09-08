@@ -25,13 +25,11 @@ const translations = {
             profession: 'Desarrollador Backend',
             description: 'Tecnólogo en desarrollo de software apasionado por el backend, la nube y la automatización. Trabajo con Java, JavaScript, bases de datos relacionales y no relacionales. Me he formado en herramientas modernas como AWS, Terraform, Docker y Kubernetes. Soy una persona autodidacta, curiosa y comprometida con mi crecimiento continuo.',
             personalInfo: {
-                github: 'GitHub',
-                linkedin: 'LinkedIn',
-                degree: 'Título',
-                degreeValue: 'Tecnólogo en Análisis y Desarrollo de Software',
-                city: 'Ciudad',
-                freelance: 'Freelance',
-                freelanceValue: 'Disponible'
+                github: 'GitHub : <span><a href="https://github.com/ingArtur" target="_blank" rel="noopener">github.com/ingArtur</a></span>',
+                linkedin: 'LinkedIn : <span><a href="https://www.linkedin.com/in/artur-andres-aroca-yara-565363272/" target="_blank" rel="noopener">linkedin.com/in/artur-andres-aroca</a></span>',
+                degree: 'Título : <span>Tecnólogo en Análisis y Desarrollo de Software</span>',
+                city: 'Ciudad : <span>Bogotá D.C.</span>',
+                freelance: 'Freelance : <span>Disponible</span>'
             },
             hireMe: 'Contrátame',
             education: {
@@ -193,13 +191,11 @@ const translations = {
             profession: 'Backend Developer',
             description: 'Software development technologist passionate about backend, cloud and automation. I work with Java, JavaScript, relational and non-relational databases. I have trained in modern tools like AWS, Terraform, Docker and Kubernetes. I am a self-taught, curious person committed to my continuous growth.',
             personalInfo: {
-                github: 'GitHub',
-                linkedin: 'LinkedIn',
-                degree: 'Degree',
-                degreeValue: 'Software Analysis and Development Technologist',
-                city: 'City',
-                freelance: 'Freelance',
-                freelanceValue: 'Available'
+                github: 'GitHub : <span><a href="https://github.com/ingArtur" target="_blank" rel="noopener">github.com/ingArtur</a></span>',
+                linkedin: 'LinkedIn : <span><a href="https://www.linkedin.com/in/artur-andres-aroca-yara-565363272/" target="_blank" rel="noopener">linkedin.com/in/artur-andres-aroca</a></span>',
+                degree: 'Degree : <span>Software Analysis and Development Technologist</span>',
+                city: 'City : <span>Bogotá D.C.</span>',
+                freelance: 'Freelance : <span>Available</span>'
             },
             hireMe: 'Hire Me',
             education: {
