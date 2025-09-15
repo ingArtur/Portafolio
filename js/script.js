@@ -361,7 +361,27 @@ const nav = document.querySelector(".nav"),
             return;
         }
 
-        // Enviar formulario
+        // Verificar si estamos en GitHub Pages (solo frontend)
+        if (window.location.hostname.includes('github.io')) {
+            // Redirigir a mailto en GitHub Pages
+            const subject = encodeURIComponent(formData.subject);
+            const body = encodeURIComponent(
+                `Nombre: ${formData.name}\n` +
+                `Email: ${formData.email}\n\n` +
+                `Mensaje:\n${formData.message}`
+            );
+            const mailtoUrl = `mailto:Arthurandres30@gmail.com?subject=${subject}&body=${body}`;
+            
+            setSubmitButtonState(false);
+            showFormStatus('Redirigiendo a tu cliente de email...', true);
+            
+            setTimeout(() => {
+                window.location.href = mailtoUrl;
+            }, 1000);
+            return;
+        }
+
+        // Enviar formulario (para cuando tengas backend)
         setSubmitButtonState(true);
 
         try {
