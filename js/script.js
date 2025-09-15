@@ -252,8 +252,8 @@ const nav = document.querySelector(".nav"),
     const submitBtn = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
 
-    // Configuración del backend
-    const API_BASE_URL = 'http://localhost:3000/api';
+    // Configuración del backend - Usar configuración dinámica
+    const API_BASE_URL = window.AppConfig ? window.AppConfig.API_BASE_URL : 'http://localhost:3000/api';
 
     // Función para mostrar mensajes de estado
     function showFormStatus(message, isSuccess = false) {

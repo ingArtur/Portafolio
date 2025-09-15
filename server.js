@@ -7,20 +7,50 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Middleware de seguridad
+app.use((req, res, next) => {
+    // Headers de seguridad
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    
+    // HSTS en producción
+    if (process.env.NODE_ENV === 'production') {
+        res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    }
+    
+    // CSP Header
+    res.setHeader('Content-Security-Policy', 
+        "default-src 'self'; " +
+        "script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com; " +
+        "style-src 'self' 'unsafe-inline' fonts.googleapis.com; " +
+        "font-src 'self' fonts.gstatic.com; " +
+        "img-src 'self' data:; " +
+        "connect-src 'self';"
+    );
+    
+    next();
+});
 
-// Configuración CORS
-app.use(cors({
-    origin: [
+// Middleware de parsing
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Configuración CORS dinámica
+const allowedOrigins = process.env.CORS_ORIGINS 
+    ? process.env.CORS_ORIGINS.split(',')
+    : [
         'http://localhost:8000',
         'http://127.0.0.1:8000',
-        'https://ingartur.github.io',
-        process.env.FRONTEND_URL
-    ].filter(Boolean),
-    methods: ['POST'],
-    allowedHeaders: ['Content-Type']
+        'https://ingartur.github.io'
+    ];
+
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ['POST', 'GET', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false
 }));
 
 // Rate limiting - máximo 5 emails por hora por IP

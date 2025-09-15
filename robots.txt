@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ingartur.github.io/Portafolio/sitemap.xml
+
+# Disallow sensitive areas (no aplica para este proyecto, pero buena práctica)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.log
+Disallow: /node_modules/
+
+# Crawl delay (opcional)
+Crawl-delay: 1
+
+# Allow specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
