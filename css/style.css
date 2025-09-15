@@ -423,9 +423,13 @@ h3.my-profession {
     border-bottom-color: var(--skin-color);
 }
 
-/* Modal certificate image - hidden by default */
+/* Modal certificate image */
 #modalCert {
-    display: none;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
 }
 
 /* Button loader - hidden by default */
@@ -599,15 +603,49 @@ h3.my-profession {
     text-align: justify;
 }
 
-.cert-image {
+/* Galería de certificados */
+.cert-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.cert-item-container {
     text-align: center;
 }
 
-.cert-image img {
+.cert-image {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.cert-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Si solo hay un certificado, centrarlo */
+.cert-gallery:has(.cert-item-container:only-child) {
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+    .cert-gallery {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .modal-content {
+        padding: 20px;
+        max-height: 90vh;
+    }
 }
 
 /* Estilos del formulario de contacto */

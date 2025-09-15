@@ -35,7 +35,12 @@ Este es un sitio web de portafolio personal para Andres Aroca, construido como u
 │   ├── style-switcher.js      # Funcionalidad de cambio de temas
 │   ├── translations.js        # Diccionario de traducciones ES/EN
 │   └── language-switcher.js   # Sistema de cambio de idioma
-├── image/                     # Imágenes de perfil y certificados
+├── image/                     # Imágenes optimizadas de perfil y certificados
+│   ├── profile.jpg            # Foto de perfil optimizada (626KB)
+│   └── certificates/          # Certificados organizados por tecnología
+│       ├── aws/               # Certificados de AWS (4 archivos, 540KB)
+│       ├── docker-kubernetes/ # Certificados de containerización (76KB)
+│       └── terraform/         # Certificados de IaC (144KB)
 └── Dockerfile                 # Para despliegue containerizado con nginx
 ```
 
@@ -219,3 +224,75 @@ POST /api/contact
 - Java, JavaScript, Spring Boot, AWS, Docker, MySQL, Git, Kubernetes
 - Cada tecnología tiene: `name`, `description`, `longDescription` en ambos idiomas
 - Los modales obtienen textos de `translations[currentLang].portfolio.technologies[tech]`
+
+## Optimización de Imágenes
+
+### Estructura de Imágenes Actualizada (Sep 2024)
+El directorio de imágenes ha sido reorganizado y expandido significativamente:
+
+**Tamaño total actual**: 2.3MB (626KB perfil + 1.7MB certificados)
+**Total de certificados**: 38 archivos organizados por tecnología
+
+### Optimizaciones Aplicadas:
+1. **Eliminación de duplicados**: Removida imagen duplicada `IMG_5646 (1).jpg`
+2. **Reorganización completa**: Certificados organizados por categorías tecnológicas
+3. **Renombrado**: Imagen de perfil renombrada a `profile.jpg`
+4. **Lazy loading**: Implementado en imagen de perfil para mejor rendimiento
+5. **Estructura categorizada**: Organización por proveedor y tipo de tecnología
+
+### Estructura Actual:
+```
+image/
+├── profile.jpg (626KB)           # Foto de perfil principal optimizada
+└── certificates/ (1.7MB, 38 archivos) # Certificados organizados por tecnología
+    ├── aws/                      # Certificados Amazon Web Services
+    ├── azure/                    # Certificados Microsoft Azure
+    ├── backend/                  # Certificados desarrollo backend
+    ├── cloud/                    # Certificados cloud computing general
+    ├── devops/                   # Certificados DevOps y automatización
+    ├── docker-kubernetes/        # Certificados containerización y orquestación
+    ├── frontend/                 # Certificados desarrollo frontend
+    ├── google/                   # Certificados Google Cloud Platform
+    ├── platzi/                   # Certificados Platzi (subdivididos)
+    │   └── fundamentals/         # Certificados de fundamentos
+    └── terraform/                # Certificados Infrastructure as Code
+```
+
+### Buenas Prácticas de Imágenes:
+- **Mantenga la estructura organizativa**: Certificados separados por tecnología
+- **Evite duplicados**: Una sola copia de cada imagen
+- **Use nombres descriptivos**: Evite nombres como `IMG_5646 (1).jpg`
+- **Considere WebP**: Para mejor compresión en navegadores modernos
+- **Implemente lazy loading**: Para mejorar tiempo de carga inicial
+
+### Futuras Optimizaciones Recomendadas:
+- Conversión a formato WebP para navegadores modernos
+- Compresión adicional de PNGs con herramientas como TinyPNG
+- Lazy loading para modales de certificaciones
+- Responsive images con diferentes resoluciones
+- Implementación de sistema de galería para mostrar certificados por categoría
+- Optimización de carga diferida para certificados no visibles inicialmente
+
+## Estado Actual del Proyecto (Sep 2024)
+
+### Cambios Recientes:
+- ✅ **Optimización de imágenes**: Reorganización completa del directorio `/image/certificates/`
+- ✅ **Expansión de certificaciones**: 38 certificados organizados en 10 categorías
+- ✅ **Mejora de estructura**: Separación clara por tecnologías y proveedores
+- ✅ **Sistema multiidioma robusto**: Traducciones completas ES/EN
+- ✅ **Backend funcional**: Formulario de contacto con envío real de emails
+
+### Archivos Modificados Pendientes de Commit:
+- `CLAUDE.md` - Documentación actualizada
+- `css/style.css` - Mejoras de estilos
+- `index.html` - Actualizaciones de estructura
+- `js/script.js` - Funcionalidades adicionales
+- `js/translations.js` - Traducciones expandidas
+- Eliminado: `image/IMG_5646 (1).jpg` (duplicado)
+- Agregado: `image/profile.jpg` + 38 certificados organizados
+
+### Próximos Pasos Recomendados:
+1. **Commit de cambios actuales**: Consolidar todas las mejoras recientes
+2. **Testing completo**: Verificar funcionalidad en diferentes dispositivos
+3. **Optimización de rendimiento**: Implementar lazy loading para certificados
+4. **SEO y accesibilidad**: Mejorar meta tags y atributos ARIA

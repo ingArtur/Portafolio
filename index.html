@@ -60,7 +60,7 @@
                             data-translate="home.downloadCV">Descargar CV</a>
                     </div>
                     <div class="home-img padd-15">
-                        <img src="image/IMG_5646 (1).jpg" alt="">
+                        <img src="image/profile.jpg" alt="" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -311,11 +311,46 @@
                         </div>
                     </div>
                     <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="terraform">
+                            <i class="fas fa-code"></i>
+                            <h5 data-translate="portfolio.technologies.terraform.name">Terraform</h5>
+                            <p data-translate="portfolio.technologies.terraform.description">Infrastructure as Code</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
                         <div class="cert-item" data-tech="kubernetes">
                             <i class="fas fa-cubes"></i>
                             <h5 data-translate="portfolio.technologies.kubernetes.name">Kubernetes</h5>
                             <p data-translate="portfolio.technologies.kubernetes.description">Orquestación de
                                 contenedores</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="react">
+                            <i class="fab fa-react"></i>
+                            <h5 data-translate="portfolio.technologies.react.name">React</h5>
+                            <p data-translate="portfolio.technologies.react.description">Desarrollo de interfaces modernas</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="devops">
+                            <i class="fas fa-cogs"></i>
+                            <h5 data-translate="portfolio.technologies.devops.name">DevOps</h5>
+                            <p data-translate="portfolio.technologies.devops.description">Automatización y CI/CD</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="azure">
+                            <i class="fab fa-microsoft"></i>
+                            <h5 data-translate="portfolio.technologies.azure.name">Azure</h5>
+                            <p data-translate="portfolio.technologies.azure.description">Cloud computing Microsoft</p>
+                        </div>
+                    </div>
+                    <div class="cert-card padd-15">
+                        <div class="cert-item" data-tech="terminal">
+                            <i class="fas fa-terminal"></i>
+                            <h5 data-translate="portfolio.technologies.terminal.name">Terminal</h5>
+                            <p data-translate="portfolio.technologies.terminal.description">Línea de comandos</p>
                         </div>
                     </div>
                 </div>
@@ -334,10 +369,8 @@
                     </div>
                     <div class="modal-body">
                         <p id="modalDescription"></p>
-                        <div class="cert-image">
-                            <img id="modalCert"
-                                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                                alt="Certificado">
+                        <div class="cert-gallery" id="certGallery">
+                            <!-- Aquí se cargarán dinámicamente las imágenes de certificados -->
                         </div>
                     </div>
                 </div>

@@ -109,10 +109,35 @@ const translations = {
                     description: 'Control de versiones',
                     longDescription: 'Git es un sistema de control de versiones distribuido. Lo uso diariamente para gestionar código, colaborar en equipo, manejar branches, realizar merges y mantener historiales de cambios.'
                 },
+                terraform: {
+                    name: 'Terraform',
+                    description: 'Infrastructure as Code',
+                    longDescription: 'Terraform es una herramienta de Infrastructure as Code que permite definir y provisionar infraestructura de nube usando código. Tengo experiencia creando recursos en AWS, gestionando estados y automatizando despliegues.'
+                },
                 kubernetes: {
                     name: 'Kubernetes',
                     description: 'Orquestación de contenedores',
                     longDescription: 'Kubernetes es una plataforma de orquestación de contenedores que automatiza el despliegue, escalado y gestión de aplicaciones containerizadas. Lo uso para gestionar microservicios en producción.'
+                },
+                react: {
+                    name: 'React',
+                    description: 'Desarrollo de interfaces modernas',
+                    longDescription: 'React es una biblioteca de JavaScript para construir interfaces de usuario interactivas. Tengo experiencia creando componentes reutilizables, manejando estado con hooks y desarrollando SPAs modernas con Vite y TailwindCSS.'
+                },
+                devops: {
+                    name: 'DevOps',
+                    description: 'Automatización y CI/CD',
+                    longDescription: 'DevOps es una metodología que combina desarrollo y operaciones para acelerar el ciclo de vida del software. Tengo experiencia con GitHub Actions, Jenkins, Docker y herramientas de automatización para CI/CD.'
+                },
+                azure: {
+                    name: 'Azure',
+                    description: 'Cloud computing Microsoft',
+                    longDescription: 'Microsoft Azure es una plataforma de servicios en la nube. Tengo experiencia con Azure DevOps para implementar flujos de trabajo de CI/CD y gestión de proyectos de desarrollo.'
+                },
+                terminal: {
+                    name: 'Terminal',
+                    description: 'Línea de comandos',
+                    longDescription: 'La terminal es una interfaz de línea de comandos para interactuar con el sistema operativo. Tengo experiencia usando comandos Unix/Linux, scripts de bash y herramientas de desarrollo desde la línea de comandos.'
                 }
             }
         },
@@ -275,10 +300,35 @@ const translations = {
                     description: 'Version control',
                     longDescription: 'Git is a distributed version control system. I use it daily to manage code, collaborate with teams, handle branches, perform merges and maintain change histories.'
                 },
+                terraform: {
+                    name: 'Terraform',
+                    description: 'Infrastructure as Code',
+                    longDescription: 'Terraform is an Infrastructure as Code tool that allows defining and provisioning cloud infrastructure using code. I have experience creating AWS resources, managing states and automating deployments.'
+                },
                 kubernetes: {
                     name: 'Kubernetes',
                     description: 'Container orchestration',
                     longDescription: 'Kubernetes is a container orchestration platform that automates deployment, scaling and management of containerized applications. I use it to manage microservices in production.'
+                },
+                react: {
+                    name: 'React',
+                    description: 'Modern interface development',
+                    longDescription: 'React is a JavaScript library for building interactive user interfaces. I have experience creating reusable components, managing state with hooks and developing modern SPAs with Vite and TailwindCSS.'
+                },
+                devops: {
+                    name: 'DevOps',
+                    description: 'Automation and CI/CD',
+                    longDescription: 'DevOps is a methodology that combines development and operations to accelerate the software lifecycle. I have experience with GitHub Actions, Jenkins, Docker and automation tools for CI/CD.'
+                },
+                azure: {
+                    name: 'Azure',
+                    description: 'Microsoft cloud computing',
+                    longDescription: 'Microsoft Azure is a cloud services platform. I have experience with Azure DevOps for implementing CI/CD workflows and development project management.'
+                },
+                terminal: {
+                    name: 'Terminal',
+                    description: 'Command line interface',
+                    longDescription: 'The terminal is a command-line interface for interacting with the operating system. I have experience using Unix/Linux commands, bash scripts and development tools from the command line.'
                 }
             }
         },

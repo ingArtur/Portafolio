@@ -82,36 +82,96 @@ const nav = document.querySelector(".nav"),
     // Datos estáticos para las certificaciones (iconos y rutas de certificados)
     const techInfo = {
         java: {
-            cert: 'image/cert-java.jpg',
+            certs: [
+                'image/certificates/backend/java_oop.png',
+                'image/certificates/backend/Backend.png'
+            ],
+            cert: 'image/certificates/backend/java_oop.png',
             icon: 'fab fa-java'
         },
         javascript: {
-            cert: 'image/cert-js.jpg',
+            certs: [
+                'image/certificates/frontend/platzi-javascript.png',
+                'image/certificates/frontend/platzi-javascript-basico.png'
+            ],
+            cert: 'image/certificates/frontend/platzi-javascript.png',
             icon: 'fab fa-js-square'
         },
         spring: {
-            cert: 'image/cert-spring.jpg',
+            certs: [
+                'image/certificates/backend/java_y_springboot.png',
+                'image/certificates/backend/Backend.png'
+            ],
+            cert: 'image/certificates/backend/java_y_springboot.png',
             icon: 'fas fa-leaf'
         },
         aws: {
-            cert: 'image/cert-aws.jpg',
+            certs: [
+                'image/certificates/aws/platzi-aws-computo-almacenamiento-bases-datos.png',
+                'image/certificates/aws/platzi-aws-fundamentos-cloud-computing.png',
+                'image/certificates/aws/platzi-infraestructura-como-codigo-aws.png',
+                'image/certificates/aws/platzi-aws-bases-datos.png',
+                'image/certificates/aws/platzi-aws-storage.png',
+                'image/certificates/aws/platzi-aws-computo-ec2.png',
+                'image/certificates/aws/platzi-aws-roles-seguridad-iam.png',
+                'image/certificates/aws/platzi-aws-redes-gobernanza-machine-learning.png',
+                'image/certificates/aws/platzi-aws-cloud-fundamentos.png'
+            ],
+            cert: 'image/certificates/aws/platzi-aws-computo-almacenamiento-bases-datos.png',
             icon: 'fab fa-aws'
         },
         docker: {
-            cert: 'image/cert-docker.jpg',
+            cert: 'image/certificates/docker-kubernetes/contenerizacion-y-orquestacion.png',
             icon: 'fab fa-docker'
         },
         mysql: {
-            cert: 'image/cert-mysql.jpg',
+            cert: 'image/certificates/platzi/fundamentals/platzi-fundamentos-bases-datos.png',
             icon: 'fas fa-database'
         },
         git: {
-            cert: 'image/cert-git.jpg',
+            cert: 'image/certificates/platzi/fundamentals/platzi-git-github.png',
             icon: 'fab fa-git-alt'
         },
+        terraform: {
+            certs: [
+                'image/certificates/terraform/Terraform.png',
+                'image/certificates/terraform/IAC.png'
+            ],
+            cert: 'image/certificates/terraform/Terraform.png',
+            icon: 'fas fa-code'
+        },
         kubernetes: {
-            cert: 'image/cert-k8s.jpg',
+            cert: 'image/certificates/docker-kubernetes/contenerizacion-y-orquestacion.png',
             icon: 'fas fa-cubes'
+        },
+        react: {
+            certs: [
+                'image/certificates/frontend/platzi-reactjs-vite-tailwindcss.png',
+                'image/certificates/frontend/platzi-react.png'
+            ],
+            cert: 'image/certificates/frontend/platzi-reactjs-vite-tailwindcss.png',
+            icon: 'fab fa-react'
+        },
+        devops: {
+            certs: [
+                'image/certificates/devops/platzi-introduccion-devops.png',
+                'image/certificates/devops/platzi-docker-fundamentos.png',
+                'image/certificates/devops/platzi-docker-avanzado.png',
+                'image/certificates/devops/platzi-github-actions.png',
+                'image/certificates/devops/platzi-jenkins-basico.png',
+                'image/certificates/devops/platzi-devops-profesional.png',
+                'image/certificates/devops/platzi-devops-certificate.png'
+            ],
+            cert: 'image/certificates/devops/platzi-introduccion-devops.png',
+            icon: 'fas fa-cogs'
+        },
+        azure: {
+            cert: 'image/certificates/azure/platzi-azure-devops-flujos-ci-cd.png',
+            icon: 'fab fa-microsoft'
+        },
+        terminal: {
+            cert: 'image/certificates/platzi/fundamentals/platzi-introduccion-terminal.png',
+            icon: 'fas fa-terminal'
         }
     };
 
@@ -120,6 +180,11 @@ const nav = document.querySelector(".nav"),
             const tech = this.getAttribute('data-tech');
             const info = techInfo[tech];
             
+            if (!info) {
+                console.error(`No se encontró información para la tecnología: ${tech}`);
+                return;
+            }
+            
             // Obtener traducciones actuales
             const currentLang = window.languageSwitcher?.currentLanguage || 'es';
             const techTranslations = translations[currentLang]?.portfolio?.technologies?.[tech];
@@ -127,7 +192,46 @@ const nav = document.querySelector(".nav"),
             document.getElementById('modalIcon').className = info.icon;
             document.getElementById('modalTitle').textContent = techTranslations?.name || tech.toUpperCase();
             document.getElementById('modalDescription').textContent = techTranslations?.longDescription || 'Descripción no disponible';
-            document.getElementById('modalCert').src = info.cert;
+            
+            // Configurar galería de certificados
+            const certGallery = document.getElementById('certGallery');
+            certGallery.innerHTML = ''; // Limpiar galería anterior
+            
+            // Determinar qué certificados mostrar
+            const certsToShow = info.certs || [info.cert];
+            
+            if (certsToShow && certsToShow.length > 0) {
+                certsToShow.forEach((certPath, index) => {
+                    if (certPath) {
+                        const certContainer = document.createElement('div');
+                        certContainer.className = 'cert-item-container';
+                        
+                        const img = document.createElement('img');
+                        img.src = certPath;
+                        img.alt = `Certificado ${index + 1} de ${techTranslations?.name || tech}`;
+                        img.className = 'cert-image';
+                        img.loading = 'lazy';
+                        
+                        img.onload = function() {
+                            console.log(`Certificado ${index + 1} cargado: ${certPath}`);
+                        };
+                        
+                        img.onerror = function() {
+                            console.error(`Error cargando certificado: ${certPath}`);
+                            this.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                            this.alt = 'Certificado no disponible';
+                        };
+                        
+                        certContainer.appendChild(img);
+                        certGallery.appendChild(certContainer);
+                    }
+                });
+                
+                console.log(`Mostrando ${certsToShow.length} certificado(s) para ${tech}`);
+            } else {
+                certGallery.innerHTML = '<p>No hay certificados disponibles para esta tecnología.</p>';
+                console.log(`No se encontraron certificados para ${tech}`);
+            }
             
             modal.style.display = 'block';
         });
